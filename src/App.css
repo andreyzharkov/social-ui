@@ -1,0 +1,28 @@
+.app {
+  text-align: center;
+  background-color: darkblue;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  position: relative;
+  background-color: black;
+  font-family: "Segoe UI", "Open Sans", Arial, sans-serif;
+  font-size: 18px;
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  color: aqua;
+}
