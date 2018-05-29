@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import Fetch from './Fetch';
 //import AddPost from './AddPost';
-import Api from './api'
+import {get_token, get_id} from './api'
 import {Link} from 'react-router-dom';
 
 function formatDate(date) {
@@ -109,7 +109,7 @@ class Feed extends Component {
     render() {
         // return <p>Successful auth</p>;
         let FetchedComponent = Fetch('GET', `users/${this.props.userId}/posts/${this.props.type}`,
-            {token: Api.getAuthToken(), userId: this.props.userId, type: this.props.type})(FeedBase);
+            {token: get_token(), userId: get_id(), type: this.props.type})(FeedBase);
 
         if (this.props.type === 'wall') {
             return (

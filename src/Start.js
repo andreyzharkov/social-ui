@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom'
-import Api from './api'
+import {login} from './api'
 
 class Start extends Component {
 
@@ -15,25 +15,6 @@ class Start extends Component {
 
         this.onSubmit = this.onSubmit.bind(this);
         this.setCurrentUserId = this.setCurrentUserId.bind(this);
-    }
-
-    setCurrentUserId(token) {
-
-        fetch(`http://social-webapi.azurewebsites.net/api/users/me/`, {
-            method: 'GET',
-            headers: {
-                'Authorization': 'Bearer ' + token,
-                'content-type': 'application/json'
-            },
-        })
-            .then(res => res.json())
-            .then((data) => {
-                console.log("me:");
-                console.log(data);
-                // setToken
-                Api._userInfo = data;
-            })
-            .catch(error => this.setState({error, errorMessage: error.message}));
     }
 
     onSubmit(event, type) {
@@ -68,10 +49,9 @@ class Start extends Component {
                 this.setState({data, token: data.token});
                 console.log(data.token);
                 // setToken
-                Api.setAuthToken(data.token);
-                this_.setCurrentUserId(data.token);
-                console.log("Api:");
-                console.log(Api);
+                // Api.setAuthToken(data.token);
+                // this_.setCurrentUserId(data.token);
+                // console.log("Api:");
             })
             .catch(error => {console.log(error); this.setState({error, errorMessage: error.message})});
         this.props.updateParent();

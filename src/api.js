@@ -1,32 +1,71 @@
 import Cookies from 'js-cookie';
 
-let Api = {
-    API_BASE: 'http://social-webapi.azurewebsites.net/api',
-    ALT_AVATAR_LINK: 'https://image.shutterstock.com/image-vector/male-avatar-profile-picture-use-260nw-193292048.jpg'
-};
+let token = null;
+let user_id = null;
 
-Api.setAuthToken = token => {
-    Cookies.set('auth-token', token);
-};
+export function is_logged_in() {
+    if (token === null) {
+        const _token = Cookies.get('auth-token');
+        const _user_id = Cookies.get('user-id');
+        if (!_token) {
+            return false;
+        }
+        token = _token;
+        user_id = _user_id;
+        return token !== null;
+    }
+    return true;
+}
 
-Api.getAuthToken = () => {
-    return Cookies.get('auth-token');
-};
+function check_code(response) {
+    if (response.status !== 200) {
+        if (response.status === 401) {
+            alert('Auth error')
+        }
+        if (response.status === 404) {
+            alert('No user')
+        }
+        return;
+    }
+    return response.json()
+}
 
-Api.removeAuthToken = () => {
-    Cookies.remove('auth-token');
-};
+function save_and_redir(json, token, remember) {
+    console.log(json);
+    user_id = json.id;
+    if (remember) {
+        Cookies.set('auth-token', token);
+        Cookies.set('user-id', user_id);
+    }
+    window.location.replace("/");
+}
 
-// Api.query = (url, method) => {
-//     fetch('http://social-webapi.azurewebsites.net/api/' + url, {
-//         method: method,
-//         headers: {
-//             'Authorization': 'Bearer ' + token,
-//         }
-//     })
-//         .then(res => res.json())
-//         .then(data => this.setState({data, isLoading: false}))
-//         .catch(error => this.setState({error, isLoading: false}));
-// }
+export function login(_token, remember) {
+    token = _token;
+    fetch(`http://social-webapi.azurewebsites.net/api/users/me/`, {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        }
+    })
+        .then(response => check_code(response))
+        .then(json => save_and_redir(json, token, remember))
+        .catch(function (error) {
+            console.log('Request failed', error)
+        });
 
-export default Api;
+}
+
+export function logout() {
+    token = null;
+    user_id = null;
+    window.location.replace("/");
+}
+
+export function get_token() {
+    return token;
+}
+
+export function get_id() {
+    return user_id;
+}
