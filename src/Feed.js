@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 
 import Fetch from './Fetch';
-//import AddPost from './AddPost';
 import {get_token, get_id} from './api'
 import {Link} from 'react-router-dom';
+import './Feed.css'
 
 function formatDate(date) {
     let dateObj = new Date(date);
@@ -41,23 +41,19 @@ const FeedBase = ({data, isLoading, error, userId, type}) => {
 
     if (error) {
         return (
-            <div className="global-error global-info">{error.message}</div>
+            <div>{error.message}</div>
         )
     }
 
     if (isLoading || userId == null) {
         return (
-            <div className="global-info">Loading...</div>
+            <div>Loading...</div>
         )
     }
 
-    if (posts.length === 0 && type === 'feed') {
+    if (posts.length === 0) {
         return (
-            <div className="global-info">
-                Your feed seems to be empty. Go to
-                <Link to='/users' className="feed-link"> user list </Link>
-                and follow someone.
-            </div>
+            <div>EMPTY</div>
         )
     }
 
@@ -112,17 +108,6 @@ class Feed extends Component {
     render() {
         let FetchedComponent = Fetch('GET', `users/${this.state.userId}/posts/${this.state.type}`,
             {token: this.state.token, userId: this.state.userId, type: this.state.type})(FeedBase);
-
-        if (this.state.type === 'wall') {
-            return (
-                <div className="wall-block">
-                    {/*<AddPost userId={this.props.userId} callback={this.update} />*/}
-                    <div className="wall-block-scroll">
-                        <FetchedComponent />
-                    </div>
-                </div>
-            )
-        }
 
         return (
             <section className="feed-block">

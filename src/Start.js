@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {login} from './api'
+import './Start.css'
 
 class Start extends Component {
 
@@ -54,58 +55,57 @@ class Start extends Component {
     render() {
         return (
             <div className="invite">
-                <div className="invite-header">
-                    Welcome to Social Network!
-                </div>
-                <div className="invite-text">
-                    Sign in or sign up before we begin
-                </div>
-                <div className="global-error global-info-inline">{this.state.errorMessage}</div>
-                <div className="invite-content">
-                    <div className="invite-sign">
-                        <div className="invite-sign-header">Sign up</div>
-                        <form onSubmit={(event) => this.onSubmit(event, 'signup')}>
-                            <label>
-                                <span className="invite-sign-label">E-mail</span>
-                                <input type="email" name="email" placeholder="john@example.com" className="invite-sign-input" /><br/>
-                            </label>
-                            <label>
-                                <span className="invite-sign-label">Password</span>
-                                <input type="password" name="password" placeholder="password" className="invite-sign-input" /><br/>
-                            </label>
-                            <label>
-                                <span className="invite-sign-label">Full name</span>
-                                <input type="name" name="name" placeholder="John Watson" className="invite-sign-input" /><br/>
-                            </label>
-                            <label>
-                                <span className="invite-sign-label">Birthday</span>
-                                <input type="date" name="birthday" placeholder="Birthday" className="invite-sign-input" /><br/>
-                            </label>
-                            <label>
-                                <input type="checkbox" name="remember" defaultChecked />
-                                <span className="invite-sign-postlabel">Remember me</span><br/>
-                            </label>
-                            <button className="invite-sign-button">Sign up</button>
-                        </form>
+                <div className="inner-invite">
+                    <div className="invite-header">
+                        Welcome to Social Network!
                     </div>
+                    <div className="global-error global-info-inline">{this.state.errorMessage}</div>
+                    <div className="invite-content">
+                        <div className="invite-sign-left">
+                            <div className="invite-sign-header">Sign up</div>
+                            <form onSubmit={(event) => this.onSubmit(event, 'signup')}>
+                                <label>
+                                    <span className="invite-sign-label">E-mail</span>
+                                    <input type="email" name="email" placeholder="john@example.com" className="invite-sign-input" /><br/>
+                                </label>
+                                <label>
+                                    <span className="invite-sign-label">Password</span>
+                                    <input type="password" name="password" placeholder="password" className="invite-sign-input" /><br/>
+                                </label>
+                                <label>
+                                    <span className="invite-sign-label">Full name</span>
+                                    <input type="name" name="name" placeholder="John Watson" className="invite-sign-input" /><br/>
+                                </label>
+                                <label>
+                                    <span className="invite-sign-label">Birthday</span>
+                                    <input type="date" name="birthday" placeholder="Birthday" className="invite-sign-input" /><br/>
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="remember" defaultChecked />
+                                    <span className="invite-sign-postlabel">Remember me</span><br/>
+                                </label>
+                                <button className="invite-sign-button">Sign up</button>
+                            </form>
+                        </div>
 
-                    <div className="invite-sign">
-                        <div className="invite-sign-header">Sign in</div>
-                        <form onSubmit={(event) => this.onSubmit(event, 'signin')}>
-                            <label>
-                                <span className="invite-sign-label">E-mail</span>
-                                <input type="email" name="email" placeholder="john@example.com" className="invite-sign-input" /><br/>
-                            </label>
-                            <label>
-                                <span className="invite-sign-label">Password</span>
-                                <input type="password" name="password" placeholder="password" className="invite-sign-input" /><br/>
-                            </label>
-                            <label>
-                                <input type="checkbox" name="remember" defaultChecked />
-                                <span className="invite-sign-postlabel">Remember me</span><br/>
-                            </label>
-                            <button className="invite-sign-button">Sign in</button>
-                        </form>
+                        <div className="invite-sign-right">
+                            <div className="invite-sign-header">Sign in</div>
+                            <form onSubmit={(event) => this.onSubmit(event, 'signin')}>
+                                <label>
+                                    <span className="invite-sign-label">E-mail</span>
+                                    <input type="email" name="email" placeholder="john@example.com" className="invite-sign-input" /><br/>
+                                </label>
+                                <label>
+                                    <span className="invite-sign-label">Password</span>
+                                    <input type="password" name="password" placeholder="password" className="invite-sign-input" /><br/>
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="remember" defaultChecked />
+                                    <span className="invite-sign-postlabel">Remember me</span><br/>
+                                </label>
+                                <button className="invite-sign-button">Sign in</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

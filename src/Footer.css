@@ -1,11 +1,12 @@
 .footer {
     position: absolute;
     background-color: #222222;
-    height: 3em;
+    height: 1.5em;
     bottom: 0;
     width: 100%;
+    text-align: center;
 }
 
 .footer-text {
-    font-size: 2em;
+    font-size: 1em;
 }

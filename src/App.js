@@ -45,22 +45,18 @@ class App extends Component {
         return this.state.logged_in ? (
             <div className="app">
                 <Header handleLogout={this.handleLogout}/>
-                <p>logged</p>
                 <main className="content">
                     <Switch>
                         <Route exact path='/' render={() => (<Redirect to="/feed"/>)}/>
                         <PropsRoute exact path='/feed' component={Feed} userId={get_id()} type='feed'/>
                         <Route exact path='/profile/:number' component={Profile} />
-                        {/*<Route exact path='/edit' component={EditProfile} />*/}
-                        {/*<Route exact path='/users' component={Users} />*/}
                     </Switch>
                 </main>
-                <Footer/>
+                <Footer className="footer"/>
             </div>
         ) : (
             <main>
                 <Header />
-                <p>logged out</p>
                 <Start/>
                 <Footer/>
             </main>

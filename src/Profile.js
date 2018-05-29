@@ -24,13 +24,13 @@ const ProfileBase = ({data, isLoading, error, currentUserId}) => {
 
     if (error) {
         return (
-            <div className="global-error global-info">{error.message}</div>
+            <div>{error.message}</div>
         )
     }
 
     if (isLoading) {
         return (
-            <div className="global-info">Loading...</div>
+            <div>Loading...</div>
         )
     }
 

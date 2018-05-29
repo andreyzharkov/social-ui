@@ -1,0 +1,25 @@
+.invite{
+    alignment:center;
+    width: fit-content;
+    border-left-width: thick;
+    margin:auto;
+    vertical-align: center
+}
+
+.invite-header{
+    font-size: 45px;
+    margin:auto;
+    alignment:center;
+}
+
+.inner-invite{
+    vertical-align: bottom;
+}
+
+.invite-sign-left{
+    float:left;
+}
+
+.invite-sign-right{
+    float:right;
+}
