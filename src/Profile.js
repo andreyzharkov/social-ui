@@ -1,13 +1,9 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 
 import Fetch from './Fetch';
-import Followers from './Followers';
-import FollowButton from './FollowButton';
-import Feed from './Feed';
-
-import './Profile.css';
+// import Feed from './Feed';
+import {get_id, get_token} from "./api";
 
 function getAge(birthday) {
     let date = new Date(birthday);
@@ -16,11 +12,10 @@ function getAge(birthday) {
 }
 
 function getAvatar(user) {
-    console.log(user.imageUrl);
     if (user.imageUrl) {
         return user.imageUrl;
     }
-    return '/icons/default-avatar.png';
+    return '/icons/default-profile.jpg';
 }
 
 const ProfileBase = ({data, isLoading, error, currentUserId}) => {
@@ -54,23 +49,16 @@ const ProfileBase = ({data, isLoading, error, currentUserId}) => {
                         {String(currentUserId) === String(profile.id) ?
                             <Link to={`/edit`} className="edit-link">Edit my profile</Link> :
                             ''}<br/>
-                        <FollowButton userId={profile.id} /><br/>
                     </div>
                     <div className="message">
-                        <img src="/icons/ic_comment.png" className="message-icon" alt="" />
                         <span className="message-text">
-                            {profile.info}
+                            {'"' + profile.info + '"'}
                         </span>
                     </div>
                 </div>
 
-                <Followers userId={profile.id} type='followers' />
-                <Followers userId={profile.id} type='followings' />
-
             </section>
-
-            <Feed userId={profile.id} type='wall' />
-
+            {console.log(profile)}
         </div>
     );
 };
@@ -79,7 +67,7 @@ const ProfileBase = ({data, isLoading, error, currentUserId}) => {
 class Profile extends Component {
     render() {
         let FetchedComponent = Fetch('GET', `users/${this.props.match.params.number}`,
-            {token: this.props.token, currentUserId: this.props.currentUserId})(ProfileBase);
+            {token: get_token(), currentUserId: get_id()})(ProfileBase);
         return <FetchedComponent />
     }
 }

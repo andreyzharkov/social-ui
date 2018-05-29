@@ -110,7 +110,6 @@ class Feed extends Component {
     }
 
     render() {
-        // return <p>Successful auth</p>;
         let FetchedComponent = Fetch('GET', `users/${this.state.userId}/posts/${this.state.type}`,
             {token: this.state.token, userId: this.state.userId, type: this.state.type})(FeedBase);
 

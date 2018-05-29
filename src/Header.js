@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './Header.css';
 
 class Header extends Component {
@@ -9,7 +8,7 @@ class Header extends Component {
             <header className="header">
                 <nav>
                     <span className="header-appname">
-                        <img src={logo} className="header-logo" alt="logo" />
+                        <img src='/icons/logo.svg' className="header-logo" alt="logo" />
                         Social Network
                     </span>
                     <span className="header-menu-element" onClick={this.props.handleLogout}>Logout</span>

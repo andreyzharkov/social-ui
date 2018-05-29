@@ -4,6 +4,7 @@ import Header from './Header'
 import Footer from './Footer'
 import Start from './Start'
 import Feed from './Feed'
+import Profile from './Profile'
 import {get_id, is_logged_in, logout} from './api'
 // import {PropsRoute} from './wrappings'
 import './App.css';
@@ -38,11 +39,10 @@ class App extends Component {
         this.setState({
             logged_in: false,
         });
-        console.log("exit handleLogout");
     }
 
     render() {
-        return is_logged_in() ? (
+        return this.state.logged_in ? (
             <div className="app">
                 <Header handleLogout={this.handleLogout}/>
                 <p>logged</p>
@@ -50,7 +50,7 @@ class App extends Component {
                     <Switch>
                         <Route exact path='/' render={() => (<Redirect to="/feed"/>)}/>
                         <PropsRoute exact path='/feed' component={Feed} userId={get_id()} type='feed'/>
-                        {/*<Route exact path='/profile/:number' component={Profile} />*/}
+                        <Route exact path='/profile/:number' component={Profile} />
                         {/*<Route exact path='/edit' component={EditProfile} />*/}
                         {/*<Route exact path='/users' component={Users} />*/}
                     </Switch>
