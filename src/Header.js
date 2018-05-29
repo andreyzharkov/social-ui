@@ -4,15 +4,6 @@ import {logout} from "./api";
 import './Header.css';
 
 class Header extends Component {
-    constructor(props){
-        super(props);
-        this.handleLogout = this.handleLogout.bind(this);
-    }
-
-    handleLogout(){
-        this.props.logged_in = false;
-        logout();
-    }
 
     render() {
         return (
@@ -22,7 +13,7 @@ class Header extends Component {
                         <img src={logo} className="header-logo" alt="logo" />
                         Social Network
                     </span>
-                    <span className="header-menu-element" onClick={this.handleLogout}>Logout</span>
+                    <span className="header-menu-element" onClick={this.props.handleLogout}>Logout</span>
                     <span className="header-menu-element">People</span>
                     <span className="header-menu-element">My profile</span>
                 </nav>

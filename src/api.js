@@ -59,7 +59,11 @@ export function login(_token, remember) {
 export function logout() {
     token = null;
     user_id = null;
+
+    Cookies.remove('auth-token');
+
     window.location.replace("/");
+    console.log("exit logout");
 }
 
 export function get_token() {

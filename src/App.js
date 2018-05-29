@@ -4,7 +4,7 @@ import Header from './Header'
 import Footer from './Footer'
 import Start from './Start'
 import Feed from './Feed'
-import {get_id, get_token, is_logged_in} from './api'
+import {get_id, get_token, is_logged_in, logout} from './api'
 import './App.css';
 
 class App extends Component {
@@ -12,12 +12,23 @@ class App extends Component {
         super(props);
         this.state = {
             logged_in: is_logged_in()
-        }
+        };
+
+        this.handleLogout = this.handleLogout.bind(this);
     }
+
+    handleLogout(){
+        logout();
+        this.setState({
+            logged_in: false,
+        });
+        console.log("exit handleLogout");
+    }
+
     render() {
         return is_logged_in() ? (
             <div className="app">
-                <Header logged_in={this.state.logged_in}/>
+                <Header handleLogout={this.handleLogout}/>
                 <p>logged</p>
                 {/*<main className="content">*/}
                     {/*<Switch>*/}
@@ -48,7 +59,7 @@ class App extends Component {
                 <main className="content">
                     <Switch>
                         <Route exact path='/' render={() => (
-                            this.state.token ? (
+                            this.state.logged_in ? (
                                 <Redirect to="/feed"/>
                             ) : (<Start updateParent={this.resetState}/>)
                         )}/>
