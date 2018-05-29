@@ -95,6 +95,9 @@ class Feed extends Component {
 
         this.state = {
             hasNewPost: false,
+            type: this.props.type,
+            userId: get_id(),
+            token: get_token()
         };
 
         this.update = this.update.bind(this);
@@ -108,10 +111,10 @@ class Feed extends Component {
 
     render() {
         // return <p>Successful auth</p>;
-        let FetchedComponent = Fetch('GET', `users/${this.props.userId}/posts/${this.props.type}`,
-            {token: get_token(), userId: get_id(), type: this.props.type})(FeedBase);
+        let FetchedComponent = Fetch('GET', `users/${this.state.userId}/posts/${this.state.type}`,
+            {token: this.state.token, userId: this.state.userId, type: this.state.type})(FeedBase);
 
-        if (this.props.type === 'wall') {
+        if (this.state.type === 'wall') {
             return (
                 <div className="wall-block">
                     {/*<AddPost userId={this.props.userId} callback={this.update} />*/}

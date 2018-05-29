@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import {logout} from "./api";
 import './Header.css';
 
 class Header extends Component {

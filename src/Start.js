@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom'
 import {login} from './api'
 
 class Start extends Component {
@@ -111,8 +110,6 @@ class Start extends Component {
                 </div>
             </div>
         );
-
-        return <Redirect to="/feed"/>;
     }
 }
 

@@ -4,8 +4,24 @@ import Header from './Header'
 import Footer from './Footer'
 import Start from './Start'
 import Feed from './Feed'
-import {get_id, get_token, is_logged_in, logout} from './api'
+import {get_id, is_logged_in, logout} from './api'
+// import {PropsRoute} from './wrappings'
 import './App.css';
+
+const renderMergedProps = (component, ...rest) => {
+    const finalProps = Object.assign({}, ...rest);
+    return (
+        React.createElement(component, finalProps)
+    );
+};
+
+const PropsRoute = ({ component, ...rest }) => {
+    return (
+        <Route {...rest} render={routeProps => {
+            return renderMergedProps(component, routeProps, rest);
+        }}/>
+    );
+};
 
 class App extends Component {
     constructor(props){
@@ -30,19 +46,15 @@ class App extends Component {
             <div className="app">
                 <Header handleLogout={this.handleLogout}/>
                 <p>logged</p>
-                {/*<main className="content">*/}
-                    {/*<Switch>*/}
-                        {/*<Route exact path='/' render={() => (<Redirect to="/feed"/>)}/>*/}
-                        {/*<Route exact path='/login' component={Start}/>*/}
-                        {/*<Route exact path='/feed' component={Feed({*/}
-                            {/*userId:get_id(),*/}
-                            {/*type:'feed',*/}
-                        {/*})}/>*/}
-                        {/*/!*<Route exact path='/profile/:number' component={Profile} />*!/*/}
-                        {/*/!*<Route exact path='/edit' component={EditProfile} />*!/*/}
-                        {/*/!*<Route exact path='/users' component={Users} />*!/*/}
-                    {/*</Switch>*/}
-                {/*</main>*/}
+                <main className="content">
+                    <Switch>
+                        <Route exact path='/' render={() => (<Redirect to="/feed"/>)}/>
+                        <PropsRoute exact path='/feed' component={Feed} userId={get_id()} type='feed'/>
+                        {/*<Route exact path='/profile/:number' component={Profile} />*/}
+                        {/*<Route exact path='/edit' component={EditProfile} />*/}
+                        {/*<Route exact path='/users' component={Users} />*/}
+                    </Switch>
+                </main>
                 <Footer/>
             </div>
         ) : (
@@ -52,30 +64,6 @@ class App extends Component {
                 <Start/>
                 <Footer/>
             </main>
-        );
-        return (
-            <div className="app">
-                <Header />
-                <main className="content">
-                    <Switch>
-                        <Route exact path='/' render={() => (
-                            this.state.logged_in ? (
-                                <Redirect to="/feed"/>
-                            ) : (<Start updateParent={this.resetState}/>)
-                        )}/>
-                        <Route exact path='/feed' render={() =>
-                            <div className="feed">
-                                {console.log(this.userInfo)}
-                                <Feed userId={this.userInfo.id} type='feed'/>
-                            </div>
-                        }/>
-                        {/*<Route exact path='/profile/:number' component={Profile} />*/}
-                        {/*<Route exact path='/edit' component={EditProfile} />*/}
-                        {/*<Route exact path='/users' component={Users} />*/}
-                    </Switch>
-                </main>
-                <Footer/>
-            </div>
         );
     }
 }
